@@ -51,7 +51,7 @@ class: center, middle
 * Created by GitHub
 * Encapsulates part of a view
 * Main purpose is testability
-* Use instead of partials and helpers
+* Use instead of partials, helpers and decorators
 
 View component:
 
@@ -95,7 +95,10 @@ A Suite of different technologies:
 * HTLM templates
 * Shadow DOM
 * Custom elements
-* (HTML imports)
+
+???
+
+Some will include HTML imports as well
 
 ---
 
@@ -107,11 +110,13 @@ multiple times.
 * Not rendered
 * Assets are not loaded
 * Clone and insert new node
+* Interpolate HTML with `<slot>`
 
 Example:
 
 ```html
 <template id="dialog">
+  <slot name="title">Default title</slot>
   <p>some content</p>
 </template>
 ```
@@ -124,9 +129,62 @@ const dialog = template.content.cloneNode(true)
 document.body.appendChild(dialog)
 ```
 
+???
+
+Use instead of JavaScript with raw strings and interpolation or Handlebars,
+Mustache and similar.
+
+---
+
 # Shadow DOM
 
+Additional encapsulated DOM trees within the main tree.
 
+* Encapsulates the DOM tree
+* Encapsulates CSS
+* Does **not** encapsulate JavaScript
+
+???
+
+Some JavaScript is encapsulated.
+
+---
+
+# Shadow DOM
+
+## Terminology
+
+* **Shadow host**: The regular DOM node that the shadow DOM is attached to.
+* **Shadow tree**: The DOM tree inside the shadow DOM.
+* **Shadow boundary**: The place where the shadow DOM ends, and the regular DOM begins.
+* **Shadow root**: The root node of the shadow tree.
+
+---
+
+# Shadow DOM
+
+## Usage
+
+### Declaratively
+
+```html
+<div id="host">
+  <template id="template" shadowroot="open">
+    <p>some content</p>
+  </template>
+</div>
+```
+
+(Chrome only)
+
+### Programmatically
+
+```javascript
+const host = document.getElementById("host")
+const template = document.getElementById("template")
+const root = host.attachShadow({ mode: "open" })
+root.appendChild(template.content)
+```
 
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
