@@ -110,7 +110,7 @@ multiple times.
 * Not rendered
 * Assets are not loaded
 * Clone and insert new node
-* Interpolate HTML with `<slot>`
+* Interpolate content with `<slot>`
 
 Example:
 
@@ -146,7 +146,8 @@ Additional encapsulated DOM trees within the main tree.
 
 ???
 
-Some JavaScript is encapsulated.
+* Some JavaScript is encapsulated.
+* Multiple `id` without a conflict
 
 ---
 
@@ -184,6 +185,196 @@ const host = document.getElementById("host")
 const template = document.getElementById("template")
 const root = host.attachShadow({ mode: "open" })
 root.appendChild(template.content)
+```
+
+---
+
+# Shadow DOM
+
+## Cross boundaries
+
+* Use the `.shadowRoot` property to the access to the shadow root
+* `.shadowRoot` returns `null` when the mode is `closed`
+
+---
+
+# Shadow DOM
+
+## Caveats
+
+* `getElementById`, `querySelector` cannot access the shadow tree
+* JavaScript libraries probably need to be adapted
+
+---
+
+# Custom Elements
+
+Allows to define new HTML elements (tags) with custom behavior.
+
+* New elements
+* Extend existing elements
+
+## Usage
+
+```javascript
+class MenuItem extends HTMLElement
+{
+  constructor() { /* ... */ }
+  connectedCallback() { /* ... */ }
+}
+
+customElements.define('menu-item', MenuItem);
+```
+
+```html
+<menu-item>
+  <span>some content</span>
+</menu-item>
+```
+
+---
+
+# Hotwire (Turbo)
+
+Hotwire is an alternative approach to building modern web applications without
+using much JavaScript by sending HTML instead of JSON over the wire.
+
+A suite of related technologies:
+
+* Turbo
+* Stimulus
+* Strada (not available yet)
+
+---
+
+# Hotwire
+
+## Turbo
+
+Similar to Turbolinks but expands the concept.
+
+Two new tags: `turbo-frame` and `turbo-stream`.
+
+---
+
+# Turbo
+
+## Turbo Frames
+
+* Decompose complex pages
+* Replace a segment with server side rendered content
+* Can only replace content
+
+### Usage
+
+```html
+<turbo-frame id="new_message">
+  <form action="/messages" method="post"></form>
+</turbo-frame>
+```
+
+Response
+
+```html
+<turbo-frame id="new_message">
+  <p>this is the content that will be inserted</p>
+</turbo-frame>
+
+<p>content outside the frame will be discarded</p>
+```
+
+---
+
+# Turbo
+
+## Turbo Streams
+
+* Deliver live page changes
+* Prefect with web sockets
+* When content needs other action then replace
+
+### Usage
+
+```html
+<turbo-stream action="append" target="messages">
+  <template>
+    <div id="message_1">My new message!</div>
+  </template>
+</turbo-stream>
+```
+
+---
+
+# Hotwire
+
+## Stimulus
+
+A modest JavaScript framework for the HTML you already have. Controllers for
+Javascript.
+
+
+```html
+<!--HTML from anywhere-->
+<div data-controller="hello">
+  <input data-hello-target="name" type="text">
+
+  <button data-action="click->hello#greet">Greet</button>
+
+  <span data-hello-target="output"></span>
+</div>
+```
+
+```javascript
+// hello_controller.js
+import { Controller } from "stimulus"
+
+export default class extends Controller {
+  static targets = [ "name", "output" ]
+
+  greet() {
+    this.outputTarget.textContent = `Hello, ${this.nameTarget.value}!`
+  }
+}
+```
+
+---
+
+# Catalyst
+
+Web Components made easy. Really small light weight library.
+
+* Created by GitHub
+* Similar to Stimulus
+* Designed for web components
+
+---
+
+# Catalyst
+
+## Usage
+
+```html
+<hello-world>
+  <input data-target="hello-world.name" type="text">
+
+  <button data-action="click:hello-world#greet">Greet</button>
+
+  <span data-target="hello-world.output"></span>
+</hello-world>
+```
+
+```typescript
+import { controller, target } from "@github/catalyst"
+
+@controller
+class HelloWorldElement extends HTMLElement {
+  @target name: HTMLElement
+  @target output: HTMLElement
+
+  greet() {
+    this.output.textContent = `Hello, ${this.name.value}!`
+  }
+}
 ```
 
     </textarea>
