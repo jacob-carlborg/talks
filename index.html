@@ -346,6 +346,7 @@ Web Components made easy. Really small light weight library.
 * Created by GitHub
 * Similar to Stimulus
 * Designed for web components
+* Uses TypeScript
 
 ---
 
@@ -376,6 +377,90 @@ class HelloWorldElement extends HTMLElement {
   }
 }
 ```
+
+---
+
+# Bootstrap
+
+CSS/JavaScript component framework. Ships with pre-made components.
+
+## Usage
+
+```html
+<button type="button" class="btn btn-primary" title="this is tooltip">
+  Primary
+</button>
+```
+
+```javascript
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
+```
+
+---
+
+# Tailwind CSS
+
+CSS utility framework.
+
+* Contains a bunch of CSS utility classes
+* Write only HTML, no CSS
+* Each class specifies a very specific CSS property
+* Does not ship with pre-made components
+
+## Usage
+
+```html
+<figure class="md:flex bg-slate-100 rounded-xl p-8 md:p-0 dark:bg-slate-800">
+  <div class="pt-6 md:p-8 text-center md:text-left space-y-4">
+    <blockquote>
+      <p class="text-lg font-medium">
+        Tailwind CSS is the only framework that I've seen scale on large teams.
+        It’s easy to customize, adapts to any design, and the build size is tiny
+      </p>
+    </blockquote>
+    <figcaption class="font-medium">
+      <div class="text-sky-500 dark:text-sky-400">
+        Sarah Dayan
+      </div>
+    </figcaption>
+  </div>
+</figure>
+```
+
+---
+
+# Simpe Form
+
+Rails component for easily rendering forms.
+
+* Automatically identifies type of column and selects correct input
+* Several integrations
+* Reduces duplication
+
+## Usage
+
+```erb
+<%= simple_form_for @user do |f| %>
+  <%= f.input :username %>
+  <%= f.input :password %>
+  <%= f.button :submit %>
+<% end %>
+```
+
+---
+
+# Dart Sass for Rails
+
+Asset pipelines integration with Sass.
+
+* Uses Dart Sass instead of Ruby Sass/Sassc
+* Maintained
+* No Node 😊
+
+Dart Sass is the new official implementation of Sass.
 
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
