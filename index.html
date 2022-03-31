@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+# UI/UX Technical Vision
+
+---
+
+# Agenda
+
+1. Goals
+2. Technologies
+3. Discussion
+
+---
+
+# Goals
+
+* Consistent UI
+* Consistent implementation of UI
+
+---
+
+class: center, middle
+
+# Technologies
+
+---
+
+# ViewComponent
+
+* Created by GitHub
+* Encapsulates part of a view
+* Main purpose is testability
+* Use instead of partials and helpers
+
+View component:
+
+```rails
+# app/components/message_component.rb
+class MessageComponent < ViewComponent::Base
+  attr_reader :name
+
+  def initialize(name:)
+    @name = name
+  end
+end
+```
+
+Template:
+
+```erb
+<%# app/components/message_component.html.erb %>
+<h1>Hello, <%= self.name %>!</h1>
+```
+
+Usage:
+
+```erb
+<%# app/views/demo/index.html.erb %>
+<%= render(MessageComponent.new(name: "World")) %>
+```
+
+???
+
+* Views in Rails are not first class
+* Views are not encapsulated
+* Each view consists of a method of a view object
+
+---
+
+# W3C Web Components
+
+A Suite of different technologies:
+
+* HTLM templates
+* Shadow DOM
+* Custom elements
+* (HTML imports)
+
+---
+
+# HTML Templates
+
+First class support for templates in HTML. Markup templates that can be reused
+multiple times.
+
+* Not rendered
+* Assets are not loaded
+* Clone and insert new node
+
+Example:
+
+```html
+<template id="dialog">
+  <p>some content</p>
+</template>
+```
+
+Usage:
+
+```javascript
+const template = document.getElementById("dialog")
+const dialog = template.content.cloneNode(true)
+document.body.appendChild(dialog)
+```
+
+# Shadow DOM
+
+
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+      slideshow.gotoLastSlide()
+    </script>
+  </body>
+</html>
