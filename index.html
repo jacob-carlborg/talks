@@ -462,6 +462,38 @@ Asset pipelines integration with Sass.
 
 Dart Sass is the new official implementation of Sass.
 
+---
+
+# Arbre
+
+HTML views in Ruby. Alternative to Erb/Haml.
+
+## Usage
+
+```ruby
+# index.html.arb
+html lang: I18n.locale do
+  head do
+    title "Welcome page"
+  end
+
+  body do
+    para "Hello, world"
+    text_node link_to "Google", "google.com"
+
+    if current_user
+      render "application/layout"
+    end
+  end
+end
+```
+
+---
+
+class: center, middle
+
+# Discussion
+
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
     </script>
