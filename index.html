@@ -53,6 +53,18 @@ class: center, middle
 * Main purpose is testability
 * Use instead of partials, helpers and decorators
 
+???
+
+* Views in Rails are not first class
+* Views are not encapsulated
+* Each view consists of a method of a view object
+
+---
+
+# ViewComponent
+
+## Usage
+
 View component:
 
 ```rails
@@ -73,18 +85,12 @@ Template:
 <h1>Hello, <%= self.name %>!</h1>
 ```
 
-Usage:
+Render component:
 
 ```erb
 <%# app/views/demo/index.html.erb %>
 <%= render(MessageComponent.new(name: "World")) %>
 ```
-
-???
-
-* Views in Rails are not first class
-* Views are not encapsulated
-* Each view consists of a method of a view object
 
 ---
 
@@ -95,10 +101,6 @@ A Suite of different technologies:
 * HTLM templates
 * Shadow DOM
 * Custom elements
-
-???
-
-Some will include HTML imports as well
 
 ---
 
@@ -142,11 +144,9 @@ Additional encapsulated DOM trees within the main tree.
 
 * Encapsulates the DOM tree
 * Encapsulates CSS
-* Does **not** encapsulate JavaScript
 
 ???
 
-* Some JavaScript is encapsulated.
 * Multiple `id` without a conflict
 
 ---
@@ -202,8 +202,13 @@ root.appendChild(template.content)
 
 ## Caveats
 
+* Does **not** encapsulate JavaScript
 * `getElementById`, `querySelector` cannot access the shadow tree
 * JavaScript libraries probably need to be adapted
+
+???
+
+* Some JavaScript is encapsulated.
 
 ---
 
@@ -231,6 +236,10 @@ customElements.define('menu-item', MenuItem);
   <span>some content</span>
 </menu-item>
 ```
+
+???
+
+* Gives a native connection point between JavaScript and an HTLM element.
 
 ---
 
