@@ -28,8 +28,9 @@ class: center, middle
 # Agenda
 
 1. Goals
-2. Technologies
-3. Discussion
+1. Technologies
+1. Combining everything
+1. Discussion
 
 ---
 
@@ -468,6 +469,7 @@ Asset pipelines integration with Sass.
 * Uses Dart Sass instead of Ruby Sass/Sassc
 * Maintained
 * No Node 😊
+* Part of the Rails project
 
 Dart Sass is the new official implementation of Sass.
 
@@ -501,7 +503,69 @@ end
 
 class: center, middle
 
-# Discussion
+# Combining Everything
+
+---
+
+# Web Components
+
+Web components is a new concept in Rails. Combines ViewComponent and WC3 web
+components.
+
+Each web component consists of:
+
+* A ViewComponent
+* A Custom Element
+* The component's styles (stylesheets)
+* The component's behavior (scripts) in the form of a Catalyst controller
+* Everything is encapsulated using Declarative Shadow DOM
+
+---
+
+# Web Components
+
+## Structure
+
+```
+.
+└── app
+    └── web_components
+        └── menu_item
+            ├── component.rb
+            ├── controller.js.ts
+            ├── styles.css.scss
+            └── template.html.haml
+```
+
+---
+
+# Web Components
+
+## ViewComponent
+
+```ruby
+# component.rb
+
+class MenuItem < ViewComponent::Base
+  attr_reader :title
+
+  def initialize(title)
+    @title = title
+  end
+end
+```
+
+---
+
+# Web Components
+
+## Custom Element
+
+```haml
+-# template.html.haml
+%menu-item
+  %template{ shadowroot: "open" }= title
+```
 
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
