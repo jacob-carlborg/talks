@@ -599,12 +599,109 @@ menu-item {
 }
 ```
 
+---
+
+# Other
+
+* Use Simple Form
+* Use asset pipeline for compilation
+* All elements are labeled with a `data-` attribute to make testing easier
+    ```haml
+    %ul{data: {attribute: "customer"}}
+      %li{data: {attribute: "name"}}= object.name
+    ```
+
+---
+
+class: center, middle
+
+# Discussion
+
+---
+
+# Template Language?
+
+* Haml
+  * Used today
+  * Indentation has meaning
+* Erb
+  * A bit verbose
+* Arbre
+  * Pure Ruby
+  * Helpers are a bit verbose
+
+---
+
+# CSS Language?
+
+* Scss
+  * Used today
+* Sass
+  * Indentation has meaning
+* CSS
+  * No compilation required
+  * Too limiting
+
+---
+
+# Frontend Language?
+
+* JavaScript
+  * No compilation required
+* TypeScript
+* Ruby
+
+---
+
+# JavaScript Framework?
+
+* Stimulus
+  * Ships with Rails 7
+  * Probably doesn't work with web components
+* Catalyst
+  * Simple and lightweight
+  * Is explicitly designed to work with web components
+* Other
+* None
+
+---
+
+# CSS Framework?
+
+* Bootstrap
+  * Prebuilt components
+* Tailwind
+  * No prebuilt components
+* Other
+
+---
+
+# Shadow DOM?
+
+* Encapsulates CSS and DOM
+* Might not be compatible with existing libraries
+
+---
+
+# Templates?
+
+* Probably not needed since we have server side rendering
+
+---
+
+# Custom Elements?
+
+* Gives native integration point for JavaScript
+* Native life cycle
+* Anchor point for stylesheets
+
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
     </script>
     <script>
       var slideshow = remark.create();
       slideshow.gotoLastSlide()
+      // slideshow.gotoSlide(34)
     </script>
   </body>
 </html>
