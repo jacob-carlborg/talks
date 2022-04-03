@@ -564,7 +564,39 @@ end
 ```haml
 -# template.html.haml
 %menu-item
-  %template{ shadowroot: "open" }= title
+  %template{ shadowroot: "open" }
+    %button{ data: { action: "click:menu-item#click" }= title
+```
+
+---
+
+# Web Components
+
+## Catalyst Controller
+
+```typescript
+// controller.js.ts
+import { controller } from "@github/catalyst"
+
+@controller
+class MenuItem extends HTMLElement {
+  click() {
+    console.log("menu item was clicked")
+  }
+}
+```
+
+---
+
+# Web Components
+
+## Stylesheet
+
+```css
+/* styles.css.scss */
+menu-item {
+  color: red;
+}
 ```
 
     </textarea>
