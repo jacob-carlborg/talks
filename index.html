@@ -501,6 +501,42 @@ end
 
 ---
 
+# Ruby2JS
+
+Compiles Ruby to JavaScript.
+
+* Some known methods translated to their native JavaScript counter part
+* Remaning methods are assumed to exist on the JavaScript side
+* Snake case is translated to camel case
+
+```ruby
+class MyClass
+  # Cowabunga, dude!
+  def my_method(str)
+    ret = "Nice #{str} you got there!"
+    ret.upcase()
+  end
+end
+
+puts MyClass.new.my_method('pizza')
+```
+
+Compiles to:
+
+```javascript
+class MyClass {
+  // Cowabunga, dude!
+  myMethod(str) {
+    let ret = `Nice ${str} you got there!`;
+    return ret.toUpperCase()
+  }
+};
+
+console.log((new MyClass).myMethod("pizza"))
+```
+
+---
+
 class: center, middle
 
 # Combining Everything
@@ -695,13 +731,191 @@ class: center, middle
 * Native life cycle
 * Anchor point for stylesheets
 
+---
+
+# Stylesheets Placement?
+
+### Questions to Answer
+
+* Location on disk?
+* How to enforce the scope?
+
+### Scopes
+
+* Partial
+* Helper
+* Component
+* Action
+* Controller
+* Global
+
+---
+
+## Location on Disk?
+
+* Follow Rails structure
+    ```
+    .
+    └── app
+        ├── assets
+        │   └── stylesheets
+        │       ├── addresses.css.scss (controller)
+        │       └── items (controller)
+        │           ├── edit (action)
+        │           │   └── _form.css.scss (partial)
+        │           ├── edit.css.scss (action)
+        │           └── index.css.scss (action)
+        └── web_components
+            └── menu_item
+                └── stylesheets.css.scss
+    ```
+* Method in component
+    ```ruby
+    class MenuItem < ViewComponent::Base
+      def styles
+        "p { color: red; }"
+      end
+    end
+    ```
+* `<style>` element in template
+* Inline in `style` attribute
+
+---
+
+## How to Enforce the Scope
+
+* Shadow DOM
+  * Handled automaticlly
+* Selectors
+    ```haml
+    -# application.html.haml
+    %body{data: {controller: "items", action: "edit"}}
+    ```
+    ```scss
+    // items/edit.css.scss
+    body[data-controller="items"] body[data-action="show"] {
+      p {
+        color: red;
+      }
+    }
+    ```
+    ```scss
+    // menu_item/stylesheets.css.scss
+    menu-item { // automatic naming scheme with custom elements
+      p {
+        color: red;
+      }
+    }
+    ```
+---
+
+# JavaScript Placement?
+
+### Questions to Answer
+
+* Location on disk?
+* How to enforce the scope?
+
+### Scopes
+
+* Partial
+* Helper
+* Component
+* Action
+* Controller
+* Global
+
+---
+
+## Location on Disk?
+
+* Follow Rails structure
+    ```
+    .
+    └── app
+        ├── assets
+        │   └── javascripts
+        │       ├── addresses.js.ts (controller)
+        │       └── items (controller)
+        │           ├── edit (action)
+        │           │   └── _form.js.ts (partial)
+        │           ├── edit.js.ts (action)
+        │           └── index.js.ts (action)
+        └── web_components
+            └── menu_item
+                └── controller.js.ts
+    ```
+* Method in component
+    ```ruby
+    class MenuItem < ViewComponent::Base
+      def javascript
+        "console.log('#{self.class.name}')"
+      end
+    end
+    ```
+* `<script>` element in template
+
+---
+
+## How to Enforce the Scope
+
+* Catalyst controller
+* Stimulus controller
+* Custom element
+    ```javascript
+    class MenuItem extends HTMLElement
+    {
+      constructor() { /* ... */ }
+      connectedCallback() { /* ... */ }
+    }
+
+    customElements.define('menu-item', MenuItem);
+    ```
+* Selectors
+    ```haml
+    -# application.html.haml
+    %body{data: {controller: "items", action: "edit"}}
+    ```
+---
+
+# Web Components Instead of Views?
+
+```
+.
+└── app
+    └── web_components
+        └── preparation_orders
+            └── show
+                ├── order_card
+                │   ├── component.rb
+                │   ├── controller.js.ts
+                │   ├── styles.css.scss
+                │   └── template.html.haml
+                ├── regimen_card
+                │   ├── component.rb
+                │   ├── controller.js.ts
+                │   ├── styles.css.scss
+                │   └── template.html.haml
+                ├── show_actions
+                │   ├── component.rb
+                │   ├── styles.css.scss
+                │   └── template.html.haml
+                ├── ward_patient_card
+                │   ├── component.rb
+                │   └── template.html.haml
+                ├── component.rb
+                ├── controller.js.ts
+                ├── styles.css.scss
+                └── template.html.haml
+```
+
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
     </script>
     <script>
       var slideshow = remark.create();
       slideshow.gotoLastSlide()
-      // slideshow.gotoSlide(34)
+      // slideshow.gotoSlide(27)
     </script>
   </body>
 </html>
