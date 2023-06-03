@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cypress</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+# Cypress
+
+---
+
+* Browser testing
+* End-to-end
+* Component
+* Framework agnostic
+* Runs in the browser
+
+---
+
+# Cypress vs Capybara
+
+## Pros
+
+* Access to frontend application
+* Can mock/stub requests
+* Can stub the time
+* Direct access to the browser
+
+## Cons
+
+* Cumbersome to create data in the backend
+* Inconvenient
+
+---
+
+* Tests are written in JavaScript/TypeScript
+* Tests create a command queue
+* Commands are executed the end of the tests
+* Custom commands and queries
+* Cypress application
+* HTML snapshots
+
+---
+
+# Setting up Data in the Backend
+
+* API calls to the backend
+* Execute shell commands (Node bundled)
+* Fixtures vs factories
+
+---
+
+# Conventions
+
+* Prefer to use test ID for selectors
+* Cleanup before instead of after
+
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
