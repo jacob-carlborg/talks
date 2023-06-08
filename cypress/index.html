@@ -25,11 +25,41 @@ class: center, middle
 
 ---
 
+# What is it?
+
 * Browser testing
 * End-to-end
 * Component
 * Framework agnostic
-* Runs in the browser
+
+---
+
+# Details
+
+* Tests run in the browser
+* Tests are written in JavaScript/TypeScript
+* Cypress application
+* HTML snapshots
+
+---
+
+# Basic Example
+
+```typescript
+describe('My First Test', () => {
+  it('Gets, types and asserts', () => {
+    cy.visit('https://example.cypress.io')
+
+    cy.contains('type').click()
+    cy.url().should('include', '/commands/actions')
+
+    cy.get('.action-email').type('fake@email.com')
+    cy.get('.action-email').should('have.value', 'fake@email.com')
+  })
+})
+```
+
+<img src="autocomplete.png"  width="80%" height="80%">
 
 ---
 
@@ -46,30 +76,194 @@ class: center, middle
 
 * Cumbersome to create data in the backend
 * Inconvenient
-
----
-
-* Tests are written in JavaScript/TypeScript
-* Tests create a command queue
-* Commands are executed the end of the tests
-* Custom commands and queries
-* Cypress application
-* HTML snapshots
-
----
-
-# Setting up Data in the Backend
-
-* API calls to the backend
-* Execute shell commands (Node bundled)
-* Fixtures vs factories
+* Some quirks around the command queue
+* Some weird choices of the API
 
 ---
 
 # Conventions
 
-* Prefer to use test ID for selectors
+* Most tests use stubbed requests
+* A few tests that perform real requests
 * Cleanup before instead of after
+* Prefer to use test ID for selectors
+
+---
+
+<template shadowrootmode="open">
+<div>
+<div class='relative overflow-x-auto sm:rounded-lg border border-gray-200 dark:border-gray-700 dark:hover:bg-gray-700'>
+  <table class='table-fixed w-full text-sm text-left text-gray-500 dark:text-gray-400 break-all'>
+    <thead class='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
+      <tr>
+        <th class='px-6 py-3' data-test='addressee' scope='col'>Mottagare</th>
+        <th class='px-6 py-3' data-test='addr1' scope='col'>Adress 1</th>
+        <th class='px-6 py-3' data-test='zip_code' scope='col'>Postnummer</th>
+        <th class='px-6 py-3' data-test='city' scope='col'>Ort</th>
+        <th class='px-6 py-3' data-test='action' scope='col'>
+          <div class='sr-only'>Visa
+          </div>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr class='border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-500'>
+        <td class='px-6 py-4' data-test='addressee'>ApoEx AB</td>
+        <td class='px-6 py-4' data-test='addr1'>Prismavägen 2</td>
+        <td class='px-6 py-4' data-test='zip_code'>14175</td>
+        <td class='px-6 py-4' data-test='city'>Kungens Kurva</td>
+        <td class='px-6 py-4 text-right' data-test='action'>
+          <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline" href="/addresses/2">Visa</a>
+        </td>
+      </tr>
+
+      <tr class='border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-500'>
+        <td class='px-6 py-4' data-test='addressee'>ApoEx AB</td>
+        <td class='px-6 py-4' data-test='addr1'>Linta Gårdsväg 5b</td>
+        <td class='px-6 py-4' data-test='zip_code'>16874</td>
+        <td class='px-6 py-4' data-test='city'>Bromma</td>
+        <td class='px-6 py-4 text-right' data-test='action'>
+          <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline" href="/addresses/3">Visa</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+</template>
+
+
+<!-- <div>
+  <template shadowrootmode="open">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
+
+    <div class='relative overflow-x-auto sm:rounded-lg border border-gray-200 dark:border-gray-700 dark:hover:bg-gray-700'>
+      <table class='table-fixed w-full text-sm text-left text-gray-500 dark:text-gray-400 break-all'>
+        <thead class='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
+          <tr>
+            <th class='px-6 py-3' data-test='addressee' scope='col'>Mottagare</th>
+            <th class='px-6 py-3' data-test='addr1' scope='col'>Adress 1</th>
+            <th class='px-6 py-3' data-test='zip_code' scope='col'>Postnummer</th>
+            <th class='px-6 py-3' data-test='city' scope='col'>Ort</th>
+            <th class='px-6 py-3' data-test='action' scope='col'>
+              <div class='sr-only'>Visa
+              </div>
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr class='border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-500'>
+            <td class='px-6 py-4' data-test='addressee'>ApoEx AB</td>
+            <td class='px-6 py-4' data-test='addr1'>Prismavägen 2</td>
+            <td class='px-6 py-4' data-test='zip_code'>14175</td>
+            <td class='px-6 py-4' data-test='city'>Kungens Kurva</td>
+            <td class='px-6 py-4 text-right' data-test='action'>
+              <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline" href="/addresses/2">Visa</a>
+            </td>
+          </tr>
+
+          <tr class='border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-500'>
+            <td class='px-6 py-4' data-test='addressee'>ApoEx AB</td>
+            <td class='px-6 py-4' data-test='addr1'>Linta Gårdsväg 5b</td>
+            <td class='px-6 py-4' data-test='zip_code'>16874</td>
+            <td class='px-6 py-4' data-test='city'>Bromma</td>
+            <td class='px-6 py-4 text-right' data-test='action'>
+              <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline" href="/addresses/3">Visa</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </template>
+</div> -->
+
+---
+
+
+# Conventions
+
+## Test ID
+
+```html
+<table data-test="addresses">
+  <tbody>
+    <tr>
+      <td data-test="addressee">ApoEx AB</td>
+      <td data-test="addr1">Prismavägen 2</td>
+      <td data-test="zip_code">14175</td>
+      <td data-test="city">Kungens Kurva</td>
+      <td data-test="action">
+        <a href="/addresses/2">Visa</a>
+      </td>
+    </tr>
+
+    <tr>
+      <td data-test="addressee">ApoEx AB</td>
+      <td data-test="addr1">Linta Gårdsväg 5b</td>
+      <td data-test="zip_code">16874</td>
+      <td data-test="city">Bromma</td>
+      <td data-test="action">
+        <a href="/addresses/3">Visa</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+```
+
+---
+
+# Setting up Data
+
+* API calls to the backend
+* Execute shell commands (Node bundled)
+* Fixtures
+
+---
+
+# Factories
+
+## Data for Stubbed Requests
+
+Plain JavaScript function:
+
+```typescript
+interface User {
+  name: string
+  email: string
+}
+
+function generateUser(attributes: Partial<User>): User {
+  return {
+    name: "Katrine Winterflood",
+    email: "katrine.winterflood@example.com",
+    ...attributes
+  }
+}
+```
+
+---
+
+# Factories
+
+## Data for Real Requests
+
+### `cypress-on-rails`
+
+Provides API endpoints and utility functions for:
+
+* Invoking FactoryBot factories
+* Cleaning up the database
+* A couple of more things
+
+---
+
+# Commands
+
+* Tests create a command queue
+* Commands are executed the end of the tests
+* Custom commands and queries
 
 
     </textarea>
