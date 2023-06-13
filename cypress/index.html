@@ -65,6 +65,21 @@ describe('My First Test', () => {
 
 ---
 
+# Commands
+
+* Tests create a command queue
+* Commands are executed the end of the tests
+* Custom commands and queries
+
+### Example
+
+```typescript
+cy.getByTestId('addressee').should('contain', 'Sandoz Inc')
+cy.findByTestId('city').should('contain', 'Hoorn')
+```
+
+---
+
 # Cypress vs Capybara
 
 ## Pros
@@ -180,21 +195,6 @@ Provides API endpoints and utility functions for:
 
 ```typescript
 cy.appFactories([['create', 'loading_dock', {name: 'Punkt 1'}]])
-```
-
----
-
-# Commands
-
-* Tests create a command queue
-* Commands are executed the end of the tests
-* Custom commands and queries
-
-### Example
-
-```typescript
-cy.getByTestId('addressee').should('contain', 'Sandoz Inc')
-cy.findByTestId('city').should('contain', 'Hoorn')
 ```
 
 ---
