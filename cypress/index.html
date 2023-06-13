@@ -90,94 +90,11 @@ describe('My First Test', () => {
 
 ---
 
-<template shadowrootmode="open">
-<div>
-<div class='relative overflow-x-auto sm:rounded-lg border border-gray-200 dark:border-gray-700 dark:hover:bg-gray-700'>
-  <table class='table-fixed w-full text-sm text-left text-gray-500 dark:text-gray-400 break-all'>
-    <thead class='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
-      <tr>
-        <th class='px-6 py-3' data-test='addressee' scope='col'>Mottagare</th>
-        <th class='px-6 py-3' data-test='addr1' scope='col'>Adress 1</th>
-        <th class='px-6 py-3' data-test='zip_code' scope='col'>Postnummer</th>
-        <th class='px-6 py-3' data-test='city' scope='col'>Ort</th>
-        <th class='px-6 py-3' data-test='action' scope='col'>
-          <div class='sr-only'>Visa
-          </div>
-        </th>
-      </tr>
-    </thead>
+# Conventions
 
-    <tbody>
-      <tr class='border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-500'>
-        <td class='px-6 py-4' data-test='addressee'>ApoEx AB</td>
-        <td class='px-6 py-4' data-test='addr1'>Prismavägen 2</td>
-        <td class='px-6 py-4' data-test='zip_code'>14175</td>
-        <td class='px-6 py-4' data-test='city'>Kungens Kurva</td>
-        <td class='px-6 py-4 text-right' data-test='action'>
-          <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline" href="/addresses/2">Visa</a>
-        </td>
-      </tr>
+## Test ID
 
-      <tr class='border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-500'>
-        <td class='px-6 py-4' data-test='addressee'>ApoEx AB</td>
-        <td class='px-6 py-4' data-test='addr1'>Linta Gårdsväg 5b</td>
-        <td class='px-6 py-4' data-test='zip_code'>16874</td>
-        <td class='px-6 py-4' data-test='city'>Bromma</td>
-        <td class='px-6 py-4 text-right' data-test='action'>
-          <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline" href="/addresses/3">Visa</a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-</div>
-</template>
-
-
-<!-- <div>
-  <template shadowrootmode="open">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
-
-    <div class='relative overflow-x-auto sm:rounded-lg border border-gray-200 dark:border-gray-700 dark:hover:bg-gray-700'>
-      <table class='table-fixed w-full text-sm text-left text-gray-500 dark:text-gray-400 break-all'>
-        <thead class='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
-          <tr>
-            <th class='px-6 py-3' data-test='addressee' scope='col'>Mottagare</th>
-            <th class='px-6 py-3' data-test='addr1' scope='col'>Adress 1</th>
-            <th class='px-6 py-3' data-test='zip_code' scope='col'>Postnummer</th>
-            <th class='px-6 py-3' data-test='city' scope='col'>Ort</th>
-            <th class='px-6 py-3' data-test='action' scope='col'>
-              <div class='sr-only'>Visa
-              </div>
-            </th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr class='border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-500'>
-            <td class='px-6 py-4' data-test='addressee'>ApoEx AB</td>
-            <td class='px-6 py-4' data-test='addr1'>Prismavägen 2</td>
-            <td class='px-6 py-4' data-test='zip_code'>14175</td>
-            <td class='px-6 py-4' data-test='city'>Kungens Kurva</td>
-            <td class='px-6 py-4 text-right' data-test='action'>
-              <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline" href="/addresses/2">Visa</a>
-            </td>
-          </tr>
-
-          <tr class='border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-500'>
-            <td class='px-6 py-4' data-test='addressee'>ApoEx AB</td>
-            <td class='px-6 py-4' data-test='addr1'>Linta Gårdsväg 5b</td>
-            <td class='px-6 py-4' data-test='zip_code'>16874</td>
-            <td class='px-6 py-4' data-test='city'>Bromma</td>
-            <td class='px-6 py-4 text-right' data-test='action'>
-              <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline" href="/addresses/3">Visa</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </template>
-</div> -->
+<img src="test_id.png"  width="100%" height="100%">
 
 ---
 
@@ -190,20 +107,20 @@ describe('My First Test', () => {
 <table data-test="addresses">
   <tbody>
     <tr>
-      <td data-test="addressee">ApoEx AB</td>
-      <td data-test="addr1">Prismavägen 2</td>
-      <td data-test="zip_code">14175</td>
-      <td data-test="city">Kungens Kurva</td>
+      <td data-test="addressee">Unit Dose Services</td>
+      <td data-test="addr1">Kim Hill 279</td>
+      <td data-test="zip_code">157571</td>
+      <td data-test="city">Neya</td>
       <td data-test="action">
         <a href="/addresses/2">Visa</a>
       </td>
     </tr>
 
     <tr>
-      <td data-test="addressee">ApoEx AB</td>
-      <td data-test="addr1">Linta Gårdsväg 5b</td>
-      <td data-test="zip_code">16874</td>
-      <td data-test="city">Bromma</td>
+      <td data-test="addressee">Sandoz Inc</td>
+      <td data-test="addr1">Sachs Pass 54</td>
+      <td data-test="zip_code">83501</td>
+      <td data-test="city">Hoorn</td>
       <td data-test="action">
         <a href="/addresses/3">Visa</a>
       </td>
