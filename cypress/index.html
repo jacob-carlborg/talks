@@ -41,6 +41,8 @@ class: center, middle
 * Cypress application
 * HTML snapshots
 
+<img src="cypress_app.png"  width="100%" height="100%">
+
 ---
 
 # Basic Example
@@ -174,6 +176,12 @@ Provides API endpoints and utility functions for:
 * Cleaning up the database
 * A couple of more things
 
+#### Example
+
+```typescript
+cy.appFactories([['create', 'loading_dock', {name: 'Punkt 1'}]])
+```
+
 ---
 
 # Commands
@@ -182,6 +190,18 @@ Provides API endpoints and utility functions for:
 * Commands are executed the end of the tests
 * Custom commands and queries
 
+### Example
+
+```typescript
+cy.getByTestId('addressee').should('contain', 'Sandoz Inc')
+cy.findByTestId('city').should('contain', 'Hoorn')
+```
+
+---
+
+class: center, middle
+
+# Demo
 
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
