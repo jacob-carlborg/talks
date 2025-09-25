@@ -1,0 +1,24 @@
+pid$target:libsystem_kernel.dylib:accept:entry
+{
+  self->accept = 1;
+}
+
+pid$target:libsystem_kernel.dylib:accept:return /self->accept/
+{
+  self->accept = 0;
+  sockets[arg1] = 1;
+}
+
+
+pid$target:libsystem_kernel.dylib:read:entry  /sockets[arg0] != 0/
+{
+  self->read = 1;
+  self->buffer = arg1;
+}
+
+pid$target:libsystem_kernel.dylib:read:return /self->read && arg1 > 0/
+{
+  self->read = 0;
+  printf("read: %s\n\n", copyinstr(self->buffer, arg1));
+  self->buffer = 0;
+}

@@ -1,0 +1,1 @@
+syscall::openat:entry /pid == $target/ { printf("%s", copyinstr(arg1)); }

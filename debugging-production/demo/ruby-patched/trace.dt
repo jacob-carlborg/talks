@@ -1,0 +1,4 @@
+ruby$target:::method-entry /copyinstr(arg1) == "foo"/
+{
+  printf("%s\n", json(copyinstr(arg4), "ok[0]"));
+}

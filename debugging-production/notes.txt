@@ -1,0 +1,34 @@
+kubectl debug -it fotara-wrb-5bd6b8dc6f-z56vz  --namespace=fotara --context=production --image=nixery.dev/shell/bpftrace/bcc/procps/findutils/vim/mount --target=sidekiq --profile=sysadmin -- bash
+
+mount -t debugfs debugfs /sys/kernel/debug
+
+increase the size of strings that can be used in the `str` function
+export BPFTRACE_MAX_STRLEN=10834
+
+bpftrace -p 1 -e 'uprobe:/proc/1/root/usr/lib/x86_64-linux-gnu/libssl.so.3:SSL_write* { printf("%s\n\n", str(arg1, 10834)); }'
+
+
+
+
+uprobe:/proc/1/root/usr/lib/x86_64-linux-gnu/libssl.so.3:SSL_read {
+  @ssl_buf[tid] = arg1;
+}
+
+uretprobe:/proc/1/root/usr/lib/x86_64-linux-gnu/libssl.so.3:SSL_read /@ssl_buf[tid]/ {
+  $len = retval;   // Number of bytes read
+  if ($len > 0) {    // Limit max bytes for safety
+    printf("SSL_read: %r\n", buf(@ssl_buf[tid], $len));
+  }
+  delete(@ssl_buf[tid]);
+}
+
+uprobe:/proc/1/root/lib/x86_64-linux-gnu/libc.so.6:read
+{
+  @read_buf[tid] = arg1;
+}
+
+uretprobe:/proc/1/root/lib/x86_64-linux-gnu/libc.so.6:read /@read_buf[tid] && retval > 0/
+{
+  printf("read: %r\n", buf(@read_buf[tid], retval));
+  delete(@read_buf[tid]);
+}

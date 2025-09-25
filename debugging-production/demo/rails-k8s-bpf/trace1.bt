@@ -1,0 +1,4 @@
+usdt::ruby:method__entry
+{
+  @[str(arg0), str(arg1)] = count();
+}

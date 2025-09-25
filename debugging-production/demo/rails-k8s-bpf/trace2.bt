@@ -1,0 +1,5 @@
+usdt::ruby:method__entry
+/str(arg0) == "Net::HTTP" && str(arg1) == "new"/
+{
+  printf("%s\n", str(arg4));
+}

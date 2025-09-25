@@ -1,0 +1,4 @@
+ruby$target:::method-entry
+{
+  @[copyinstr(arg1)] = count();
+}

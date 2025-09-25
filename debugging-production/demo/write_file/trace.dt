@@ -1,0 +1,16 @@
+pid$target:libsystem_kernel.dylib:open:entry /copyinstr(arg0) == "foo.txt"/
+{
+  self->foo = 1;
+}
+
+pid$target:libsystem_kernel.dylib:open:return /self->foo/
+{
+  self->fd = arg1;
+  self->foo = 0;
+}
+
+pid$target:libsystem_kernel.dylib:write:entry /self->fd && pid != $pid/
+{
+  printf("%s\n", copyinstr(arg1, arg2));
+  self->fd = 0;
+}
